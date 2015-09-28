@@ -10,6 +10,18 @@ module WeddingApi
     config.app_generators.scaffold_controller :responders_controller
 
     config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource(
+          '*',
+          headers: :any,
+          expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :post, :options, :delete, :put]
+        )
+      end
+    end
+
     config.autoload_paths += %W(
       #{config.root}/app/services
       #{config.root}/lib
