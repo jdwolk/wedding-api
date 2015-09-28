@@ -1,4 +1,8 @@
 class Guest < ActiveRecord::Base
+  # TODO: add :registerable, :recoverable, :rememberable, :validatable
+  # if email / pass registration allowed
+  devise :database_authenticatable, :trackable
+
   has_one :received_invite,
           class_name: 'Invite',
           dependent: :destroy,
