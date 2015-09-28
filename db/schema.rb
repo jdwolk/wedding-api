@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927052414) do
+ActiveRecord::Schema.define(version: 20150928000430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "attendees", force: :cascade do |t|
+  create_table "admins", force: :cascade do |t|
+    t.string   "email",      null: false
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admins", ["email"], name: "index_admins_on_email", using: :btree
+
+  create_table "guests", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -26,15 +35,16 @@ ActiveRecord::Schema.define(version: 20150927052414) do
   end
 
   create_table "invites", force: :cascade do |t|
-    t.integer  "attendee_id"
-    t.boolean  "accepted",    default: false
+    t.integer  "inviter_id"
+    t.string   "inviter_type"
+    t.integer  "invitee_id"
+    t.boolean  "accepted",     default: false
     t.datetime "sent_at"
     t.datetime "accepted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "invites", ["attendee_id"], name: "index_invites_on_attendee_id", using: :btree
+  add_index "invites", ["inviter_type", "inviter_id"], name: "index_invites_on_inviter_type_and_inviter_id", using: :btree
 
-  add_foreign_key "invites", "attendees"
 end

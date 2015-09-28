@@ -1,9 +1,9 @@
 module Inviting
   class GuestInviter
-    attr_reader :attendee
+    attr_reader :guest
 
-    def initialize(attendee)
-      @attendee = attendee
+    def initialize(guest)
+      @guest = guest
     end
 
     def invite!
@@ -11,23 +11,23 @@ module Inviting
     end
 
     def invite
-      @invite ||= InviteBuilder.for(attendee).build
+      @invite ||= InviteBuilder.for(guest).build
     end
 
     class InviteBuilder
-      attr_reader :attendee, :current_time
+      attr_reader :guest, :current_time
 
-      def self.for(attendee, options = {})
-        new(attendee, options)
+      def self.for(guest, options = {})
+        new(guest, options)
       end
 
-      def initialize(attendee, options = {})
-        @attendee = attendee
-        @current_tine = options[:current_time] || Time.now
+      def initialize(guest, options = {})
+        @guest = guest
+        @current_time = options[:current_time] || Time.now
       end
 
       def build
-        attendee.build_invite(sent_at: current_time)
+        guest.build_invite(sent_at: current_time)
       end
     end
   end
