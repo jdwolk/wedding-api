@@ -1,7 +1,8 @@
 class Guest < ActiveRecord::Base
   has_one :received_invite,
           class_name: 'Invite',
-          dependent: :destroy
+          dependent: :destroy,
+          foreign_key: :invitee_id
 
   has_many :sendable_invites,
            as: :inviter,

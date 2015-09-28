@@ -1,7 +1,8 @@
-
 admin = FactoryGirl.create(:admin)
+admin_inviter = Presenter.present(admin, roles: [Inviter])
 
-guest1 = FactoryGirl.create(:guest)
-guest2 = FactoryGirl.create(:guest)
+guest1 = FactoryGirl.build(:guest)
+admin_inviter.invite!(guest1)
 
-
+Inviting::Granter.grant(2).invites.to(guest1)
+guest1.save!

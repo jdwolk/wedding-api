@@ -11,6 +11,7 @@ class InviteFiller
 
   def fill_invite(guest_attrs)
     return with_error(I18n.t(:no_invites_left)) unless invites_left?
+    return with_error(I18n.t(:must_accept_invite)) unless resource.accepted?
     available_invite.update(
       invitee: guest_from(guest_attrs)
     )
