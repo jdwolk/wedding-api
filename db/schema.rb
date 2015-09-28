@@ -25,13 +25,15 @@ ActiveRecord::Schema.define(version: 20150928000430) do
   add_index "admins", ["email"], name: "index_admins_on_email", using: :btree
 
   create_table "guests", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
     t.string   "email"
-    t.string   "passcode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "passcode",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  add_index "guests", ["passcode"], name: "index_guests_on_passcode", unique: true, using: :btree
 
   create_table "invites", force: :cascade do |t|
     t.integer  "inviter_id"

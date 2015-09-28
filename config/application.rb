@@ -26,5 +26,7 @@ module WeddingApi
       #{config.root}/app/services
       #{config.root}/lib
     )
+
+    config.action_controller.action_on_unpermitted_parameters = :log
   end
 end

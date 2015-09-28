@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :guests
   namespace :v1 do
+    resource :auth,
+             only: [:create],
+             controller: 'auth'
     resources :guests
   end
 end

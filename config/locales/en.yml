@@ -1,3 +1,6 @@
 en:
+  invalid_credentials: "Invalid credentials"
+  invalid_token: "Invalid token"
+  missing_token: "Missing token"
   must_accept_invite: "Please accept your invite first"
   no_invites_left: "You have already invited your max # of guests"
