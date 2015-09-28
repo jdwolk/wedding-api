@@ -1,3 +1,5 @@
 class Admin < ActiveRecord::Base
-  has_many :invites, as: :inviter
+  has_many :sendable_invites,
+           as: :inviter,
+           class_name: 'Invite'
 end

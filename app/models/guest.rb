@@ -3,7 +3,7 @@ class Guest < ActiveRecord::Base
           class_name: 'Invite',
           dependent: :destroy
 
-  has_many :sent_invites,
+  has_many :sendable_invites,
            as: :inviter,
            class_name: 'Invite'
 
